@@ -14,12 +14,12 @@ const searchYUrci = (deductVal: number, q: number) => {
     0,
   );
 
-  const yResult = y[closestIndex]
-  const urciStatus = searchUrciStatus(yResult)
+  const yResult = y[closestIndex];
+  const urciStatus = searchUrciStatus(yResult);
 
   return {
     urci_value: yResult,
-    urci_status: urciStatus
+    urci_status: urciStatus,
   };
 };
 
