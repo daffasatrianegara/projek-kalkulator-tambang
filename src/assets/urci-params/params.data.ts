@@ -259,5 +259,5 @@ export {
   potholesParams,
   corrugationParams,
   looseAgregateParams,
-  drainageParams
+  drainageParams,
 };
