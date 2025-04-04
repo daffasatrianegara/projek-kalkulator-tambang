@@ -1,5 +1,5 @@
 const calculateArea = (length: string, width: string) => {
-    return parseFloat(length) * parseFloat(width)
-}
+  return parseFloat(length) * parseFloat(width);
+};
 
-export default calculateArea
+export default calculateArea;

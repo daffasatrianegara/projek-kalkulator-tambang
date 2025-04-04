@@ -24,9 +24,9 @@ const MainPage = () => {
   }, [width, length]);
 
   const handleDataUpdate = (stepNumber: number, data: any) => {
-    setStepData(prev => ({
+    setStepData((prev) => ({
       ...prev,
-      [stepNumber]: data
+      [stepNumber]: data,
     }));
   };
 
@@ -44,8 +44,7 @@ const MainPage = () => {
               className="font-semibold text-crayola text-lg sm:text-xl"
               htmlFor="pu"
             >
-              Measured Road Length (m){" "}
-              <span className="text-vermilion">*</span>
+              Measured Road Length (m) <span className="text-vermilion">*</span>
             </label>
             <input
               className="mt-1"
@@ -89,7 +88,12 @@ const MainPage = () => {
           </div>
         </div>
         {/* rutting  */}
-        <RuttingComponent onDataUpdate={ handleDataUpdate } meassuredLength={length} meassuredWidth={width} meassuredArea={area} />
+        <RuttingComponent
+          onDataUpdate={handleDataUpdate}
+          meassuredLength={length}
+          meassuredWidth={width}
+          meassuredArea={area}
+        />
       </div>
     </div>
   );
