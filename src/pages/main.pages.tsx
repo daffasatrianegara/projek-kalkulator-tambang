@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import searchYUrci from "../utils/searchYUrci";
 import calculateArea from "../utils/calculateArea";
 import RuttingComponent from "../components/step1.rutting.components";
+import { Toaster } from "@/components/ui/sonner";
 
 const MainPage = () => {
   const [length, setLength] = useState("");
@@ -32,6 +33,7 @@ const MainPage = () => {
 
   return (
     <div className="w-full min-h-screen py-20 bg-sea-green flex justify-center items-center">
+      <Toaster />
       <div className="lg:w-[80%] md:w-[90%] w-[95%] h-full bg-alabaster p-8 rounded-lg">
         <div className="mb-8">
           <p className="text-center font-bold text-2xl md:text-3xl text-crayola">
