@@ -1,15 +1,35 @@
-import {
-  ruttingParams,
-  improperCrossSectionParams,
-  potholesParams,
-  corrugationParams,
-  looseAgregateParams,
-  drainageParams,
-} from "../assets/urci-params/params.data";
-import searchY from "../utils/searchY";
+import { useEffect, useState } from "react";
 import searchYUrci from "../utils/searchYUrci";
+import calculateArea from "../utils/calculateArea";
+import RuttingComponent from "../components/step1.rutting.components";
 
 const MainPage = () => {
+  const [length, setLength] = useState("");
+  const [width, setWidth] = useState("");
+  const [area, setArea] = useState(0);
+  const [stepData, setStepData] = useState({
+    1: { deduct_value: 0 },
+    2: { deduct_value: 0 },
+    3: { deduct_value: 0 },
+    4: { deduct_value: 0 },
+    5: { deduct_value: 0 },
+    6: { deduct_value: 0 },
+    7: { deduct_value: 0 },
+  });
+
+  useEffect(() => {
+    if (width && length) {
+      setArea(calculateArea(length, width));
+    }
+  }, [width, length]);
+
+  const handleDataUpdate = (stepNumber: number, data: any) => {
+    setStepData(prev => ({
+      ...prev,
+      [stepNumber]: data
+    }));
+  };
+
   return (
     <div className="w-full min-h-screen py-20 bg-sea-green flex justify-center items-center">
       <div className="lg:w-[80%] md:w-[90%] w-[95%] h-full bg-alabaster p-8 rounded-lg">
@@ -18,121 +38,58 @@ const MainPage = () => {
             URCI Calculator
           </p>
         </div>
-        <div className="flex sm:flex-nowrap flex-wrap w-full gap-5">
-          <div className="w-full sm:w-1/2">
+        <div className="flex sm:flex-nowrap flex-wrap w-full gap-2">
+          <div className="w-full sm:w-1/3">
             <label
               className="font-semibold text-crayola text-lg sm:text-xl"
               htmlFor="pu"
             >
-              Measured Road Length <span className="text-vermilion">*</span>
+              Measured Road Length (m){" "}
+              <span className="text-vermilion">*</span>
             </label>
             <input
               className="mt-1"
               id="pu"
-              name="pUkr"
               type="number"
               placeholder="Enter the length of the road you measured..."
+              onChange={(e) => setLength(e.target.value)}
+              required
             />
           </div>
-          <div className="w-full sm:w-1/2">
+          <div className="w-full sm:w-1/3">
             <label
               className="font-semibold text-crayola text-lg sm:text-xl"
               htmlFor="lu"
             >
-              Measured Road Width <span className="text-vermilion">*</span>
+              Measured Road Width (m) <span className="text-vermilion">*</span>
             </label>
             <input
               id="lu"
               className="mt-1"
-              name="lUkr"
               type="number"
               placeholder="Enter the width of the road you are measuring..."
+              onChange={(e) => setWidth(e.target.value)}
+              required
             />
           </div>
-        </div>
-
-        {/* Rutting */}
-        <div className="mt-4">
-          <p className="font-semibold text-xl md:text-2xl text-crayola-hover">
-            Rutting
-          </p>
-        </div>
-        <div className="flex sm:flex-nowrap flex-wrap w-full gap-5">
-          <div className="w-full sm:w-1/2">
+          <div className="w-full sm:w-1/3">
             <label
               className="font-semibold text-crayola text-lg sm:text-xl"
-              htmlFor="pur"
+              htmlFor="luk"
             >
-              Length of Damaged Road <span className="text-vermilion">*</span>
+              measured road area (m²) <span className="text-vermilion">*</span>
             </label>
             <input
+              id="luk"
               className="mt-1"
-              id="pur"
-              name="pUkrR"
               type="number"
-              placeholder="Enter the length of the damaged road..."
-            />
-          </div>
-          <div className="w-full sm:w-1/2">
-            <label
-              className="font-semibold text-crayola text-lg sm:text-xl"
-              htmlFor="lu"
-            >
-              Width of Damaged Road <span className="text-vermilion">*</span>
-            </label>
-            <input
-              className="mt-1"
-              id="lu"
-              name="lUkrR"
-              type="number"
-              placeholder="Enter the width of the damaged road..."
+              value={area}
+              disabled
             />
           </div>
         </div>
-        <div className="flex sm:flex-nowrap flex-wrap w-full gap-5 mt-3">
-          <div className="w-full sm:w-1/2">
-            <label
-              className="font-semibold text-crayola text-lg sm:text-xl"
-              htmlFor="cat1"
-            >
-              Damage Category <span className="text-vermilion">*</span>
-            </label>
-            <select className="mt-1" name="cat1" id="cat1">
-              <option value="high">high</option>
-              <option value="medium">medium</option>
-              <option value="low">low</option>
-            </select>
-          </div>
-          <div className="w-full sm:w-1/2 bg-white p-2 rounded mt-0 sm:mt-2">
-            <ul className="sm:text-sm text-xs list-disc pl-4">
-              <li>High</li>
-              <p className="text-vermilion">
-                Rutting {">"} 7,5 cm, getaran keras, terdapat pumping material
-                subgrade, subgrade tidak memiliki daya dukung.
-              </p>
-              <li>Medium</li>
-              <p className="text-vermilion">
-                Rutting 2,5 – 7,5 cm, Getaran minim, kecepatan kendaraan
-                menurun.
-              </p>
-              <li>Low</li>
-              <p className="text-vermilion">
-                Rutting max 2,5 cm, Getaran minim, kecepatan kendaraan normal.
-              </p>
-            </ul>
-          </div>
-        </div>
-        <div className="flex sm:flex-nowrap flex-wrap w-full gap-5 mt-3">
-          <div className="w-full sm:w-1/2">
-            <label
-              className="font-semibold text-crayola text-lg sm:text-xl"
-              htmlFor="luasKrRoot"
-            >
-              Area of ​​Damaged Road
-            </label>
-            <input id="luasKrRoot" type="number" disabled />
-          </div>
-        </div>
+        {/* rutting  */}
+        <RuttingComponent onDataUpdate={ handleDataUpdate } meassuredLength={length} meassuredWidth={width} meassuredArea={area} />
       </div>
     </div>
   );
