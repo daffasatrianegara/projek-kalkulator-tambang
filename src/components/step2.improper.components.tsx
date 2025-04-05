@@ -49,7 +49,7 @@ const ImproperComponent: React.FC<Props> = ({
         const y = searchY(improperCrossSectionParams, cat, density);
         if (y !== null) {
           setDv(y);
-          onDataUpdate(2, { deduct_value: dv });
+          onDataUpdate(2, { deduct_value: y });
         }
       }
     }

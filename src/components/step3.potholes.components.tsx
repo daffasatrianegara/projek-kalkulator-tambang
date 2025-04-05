@@ -49,7 +49,7 @@ const PotholesComponent: React.FC<Props> = ({
         const y = searchY(potholesParams, cat, density);
         if (y !== null) {
           setDv(y);
-          onDataUpdate(3, { deduct_value: dv });
+          onDataUpdate(3, { deduct_value: y });
         }
       }
     }
