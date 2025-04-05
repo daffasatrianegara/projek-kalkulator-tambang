@@ -24,9 +24,9 @@ const MainPage = () => {
     6: { deduct_value: 0 },
     7: { deduct_value: 0 },
   });
-  const [x, setX] = useState(0)
-  const [y, setY] = useState(0)
-  const [status, setStatus] = useState("") 
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     if (width && length) {
@@ -38,11 +38,11 @@ const MainPage = () => {
     ).length;
     setQ(count);
 
-    const searchUrciResult = searchYUrci(calculateURCI(), q)
-    if(searchUrciResult) {
-      setX(searchUrciResult.appr_value)
-      setY(searchUrciResult.urci_value)
-      setStatus(searchUrciResult.urci_status)
+    const searchUrciResult = searchYUrci(calculateURCI(), q);
+    if (searchUrciResult) {
+      setX(searchUrciResult.appr_value);
+      setY(searchUrciResult.urci_value);
+      setStatus(searchUrciResult.urci_status);
     }
   }, [width, length, stepData]);
 
@@ -269,9 +269,7 @@ const MainPage = () => {
                     <th className="border border-black font-normal py-1 capitalize w-[60%]">
                       Approximate Value
                     </th>
-                    <th className="border border-black font-normal">
-                      {x}
-                    </th>
+                    <th className="border border-black font-normal">{x}</th>
                   </tr>
                   <tr>
                     <th className="border border-black font-semibold py-1 capitalize w-[60%] bg-green-200">
