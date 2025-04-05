@@ -34,7 +34,7 @@ const CustomToast = ({ type, title, message }: ctTypes) => {
       transition: "background 0.3s ease",
       border: "none",
     },
-    duration: 3000,
+    duration: 5000,
     visible: true,
     className: "animate-slide",
   };

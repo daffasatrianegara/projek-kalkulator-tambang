@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/sonner";
 import RuttingComponent from "../components/step1.rutting.components";
 import ImproperComponent from "@/components/step2.improper.components";
 import PotholesComponent from "@/components/step3.potholes.components";
+import CorrugationComponent from "@/components/step4.corrugation.components";
+import LooseComponent from "@/components/step5.loose.components";
 
 const MainPage = () => {
   const [length, setLength] = useState("");
@@ -91,7 +93,7 @@ const MainPage = () => {
             />
           </div>
         </div>
-        <div className="mt-8 flex flex-col gap-8">
+        <div className="mt-7 flex flex-col gap-7">
           {/* rutting  */}
           <RuttingComponent
             onDataUpdate={handleDataUpdate}
@@ -110,6 +112,22 @@ const MainPage = () => {
 
           {/* potholes  */}
           <PotholesComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
+
+          {/* corrugation  */}
+          <CorrugationComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
+
+          {/* loose aggregate  */}
+          <LooseComponent
             onDataUpdate={handleDataUpdate}
             meassuredLength={length}
             meassuredWidth={width}
