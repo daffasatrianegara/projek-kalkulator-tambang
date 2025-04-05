@@ -32,7 +32,7 @@ const CustomToast = ({ type, title, message }: ctTypes) => {
       borderRadius: "8px",
       padding: "12px",
       transition: "background 0.3s ease",
-      border: "none"
+      border: "none",
     },
     duration: 3000,
     visible: true,

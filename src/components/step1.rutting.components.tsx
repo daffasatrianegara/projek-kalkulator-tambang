@@ -27,9 +27,9 @@ const RuttingComponent: React.FC<Props> = ({
           message:
             "The reported road damage length exceeds the total measured length of the road.",
         });
-        return
+        return;
       }
-      
+
       if (Number(width) > Number(meassuredWidth)) {
         CustomToast({
           type: "error",
@@ -37,7 +37,7 @@ const RuttingComponent: React.FC<Props> = ({
           message:
             "The reported road damage width exceeds the total measured width of the road.",
         });
-        return
+        return;
       }
 
       setArea(calculateArea(length, width));
