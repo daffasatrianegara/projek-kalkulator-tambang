@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { ruttingParams } from "../assets/urci-params/params.data";
+import { potholesParams } from "../assets/urci-params/params.data";
 import searchY from "../utils/searchY";
 import calculateArea from "../utils/calculateArea";
 import calculateDensity from "../utils/calculateDensity";
 import { Props } from "../types/props.components.types";
 import { CustomToast } from "./ui/customToast";
 
-const RuttingComponent: React.FC<Props> = ({
+const PotholesComponent: React.FC<Props> = ({
   onDataUpdate,
   meassuredLength,
   meassuredWidth,
@@ -27,9 +27,9 @@ const RuttingComponent: React.FC<Props> = ({
           message:
             "The reported road damage length exceeds the total measured length of the road.",
         });
-        return
+        return;
       }
-      
+
       if (Number(width) > Number(meassuredWidth)) {
         CustomToast({
           type: "error",
@@ -37,7 +37,7 @@ const RuttingComponent: React.FC<Props> = ({
           message:
             "The reported road damage width exceeds the total measured width of the road.",
         });
-        return
+        return;
       }
 
       setArea(calculateArea(length, width));
@@ -46,19 +46,19 @@ const RuttingComponent: React.FC<Props> = ({
         area.toString(),
       );
       if (density) {
-        const y = searchY(ruttingParams, cat, density);
+        const y = searchY(potholesParams, cat, density);
         if (y !== null) {
           setDv(y);
-          onDataUpdate(1, { deduct_value: dv });
+          onDataUpdate(3, { deduct_value: dv });
         }
       }
     }
   }, [length, width, area, cat]);
   return (
     <div>
-      <div>
+      <div className="">
         <p className="font-semibold text-xl md:text-2xl text-crayola-hover">
-          Rutting
+          Potholes
         </p>
       </div>
       <div className="flex sm:flex-nowrap flex-wrap w-full gap-3">
@@ -136,16 +136,16 @@ const RuttingComponent: React.FC<Props> = ({
           <ul className="sm:text-sm text-xs list-disc pl-4">
             <li>High</li>
             <p className="text-vermilion">
-              Rutting {">"} 7,5 cm, getaran keras, terdapat pumping material
-              subgrade, subgrade tidak memiliki daya dukung.
+              Kedalaman lubang lebih dari 10 cm, panjang dan lebar lebih dari
+              0,8 m.
             </p>
             <li>Medium</li>
             <p className="text-vermilion">
-              Rutting 2,5 – 7,5 cm, Getaran minim, kecepatan kendaraan menurun.
+              Kedalaman lubang antara 5-10 cm, panjang dan lebar 0,8 m.
             </p>
             <li>Low</li>
             <p className="text-vermilion">
-              Rutting max 2,5 cm, Getaran minim, kecepatan kendaraan normal.
+              Kedalaman lubang maksimal 5 cm, lebar dan panjang 0,6 m.
             </p>
           </ul>
         </div>
@@ -154,4 +154,4 @@ const RuttingComponent: React.FC<Props> = ({
   );
 };
 
-export default RuttingComponent;
+export default PotholesComponent;

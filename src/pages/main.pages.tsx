@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import searchYUrci from "../utils/searchYUrci";
 import calculateArea from "../utils/calculateArea";
-import RuttingComponent from "../components/step1.rutting.components";
 import { Toaster } from "@/components/ui/sonner";
+import RuttingComponent from "../components/step1.rutting.components";
+import ImproperComponent from "@/components/step2.improper.components";
+import PotholesComponent from "@/components/step3.potholes.components";
 
 const MainPage = () => {
   const [length, setLength] = useState("");
@@ -33,7 +35,7 @@ const MainPage = () => {
 
   return (
     <div className="w-full min-h-screen py-20 bg-sea-green flex justify-center items-center">
-      <Toaster />
+      <Toaster position="top-right" richColors />
       <div className="lg:w-[80%] md:w-[90%] w-[95%] h-full bg-alabaster p-8 rounded-lg">
         <div className="mb-8">
           <p className="text-center font-bold text-2xl md:text-3xl text-crayola">
@@ -89,13 +91,43 @@ const MainPage = () => {
             />
           </div>
         </div>
-        {/* rutting  */}
-        <RuttingComponent
-          onDataUpdate={handleDataUpdate}
-          meassuredLength={length}
-          meassuredWidth={width}
-          meassuredArea={area}
-        />
+        <div className="mt-8 flex flex-col gap-8">
+          {/* rutting  */}
+          <RuttingComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
+
+          {/* improper cross section  */}
+          <ImproperComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
+
+          {/* potholes  */}
+          <PotholesComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
+        </div>
+
+        {/* delete when the project up to deployment  */}
+        <div className="mt-4">
+          <h3 className="font-bold text-crayola">Deduct Values per Step:</h3>
+          <ul>
+            {Object.entries(stepData).map(([stepNumber, data]) => (
+              <li key={stepNumber}>
+                Step {stepNumber}: {data.deduct_value}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
