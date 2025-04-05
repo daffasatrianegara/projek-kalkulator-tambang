@@ -8,11 +8,13 @@ import PotholesComponent from "@/components/step3.potholes.components";
 import CorrugationComponent from "@/components/step4.corrugation.components";
 import LooseComponent from "@/components/step5.loose.components";
 import DustComponent from "@/components/step6.dust.components";
+import DrainageComponent from "@/components/step7.drainage.components";
 
 const MainPage = () => {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
   const [area, setArea] = useState(0);
+  const [q, setQ] = useState<number>(0);
   const [stepData, setStepData] = useState({
     1: { deduct_value: 0 },
     2: { deduct_value: 0 },
@@ -22,18 +24,42 @@ const MainPage = () => {
     6: { deduct_value: 0 },
     7: { deduct_value: 0 },
   });
+  const [x, setX] = useState(0)
+  const [y, setY] = useState(0)
+  const [status, setStatus] = useState("") 
 
   useEffect(() => {
     if (width && length) {
       setArea(calculateArea(length, width));
     }
-  }, [width, length]);
+
+    const count = Object.values(stepData).filter(
+      (data) => data.deduct_value >= 5,
+    ).length;
+    setQ(count);
+
+    const searchUrciResult = searchYUrci(calculateURCI(), q)
+    if(searchUrciResult) {
+      setX(searchUrciResult.appr_value)
+      setY(searchUrciResult.urci_value)
+      setStatus(searchUrciResult.urci_status)
+    }
+  }, [width, length, stepData]);
 
   const handleDataUpdate = (stepNumber: number, data: any) => {
     setStepData((prev) => ({
       ...prev,
       [stepNumber]: data,
     }));
+  };
+
+  const calculateURCI = () => {
+    const totalDeduct = Object.values(stepData).reduce(
+      (sum, step) => sum + step.deduct_value,
+      0,
+    );
+
+    return totalDeduct;
   };
 
   return (
@@ -137,18 +163,136 @@ const MainPage = () => {
 
           {/* dust  */}
           <DustComponent onDataUpdate={handleDataUpdate} />
+
+          {/* drainage  */}
+          <DrainageComponent
+            onDataUpdate={handleDataUpdate}
+            meassuredLength={length}
+            meassuredWidth={width}
+            meassuredArea={area}
+          />
         </div>
 
-        {/* delete when the project up to deployment  */}
-        <div className="mt-4">
-          <h3 className="font-bold text-crayola">Deduct Values per Step:</h3>
-          <ul>
-            {Object.entries(stepData).map(([stepNumber, data]) => (
-              <li key={stepNumber}>
-                Step {stepNumber}: {data.deduct_value}
-              </li>
-            ))}
-          </ul>
+        <div className="w-full bg-white rounded p-5 mt-7">
+          <p className="font-semibold text-xl md:text-2xl text-crayola">
+            Result:
+          </p>
+          <div className="flex sm:flex-nowrap flex-wrap w-full gap-5 mt-2">
+            <div className="w-full sm:w-1/2">
+              <table className="w-full border border-black">
+                <thead>
+                  <tr>
+                    <th
+                      className="font-semibold py-1 bg-sea-green text-white border border-black"
+                      colSpan={2}
+                    >
+                      Deduct Value From Each Step
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(stepData).map(([index, data]) => {
+                    const arrTitle = [
+                      "rutting",
+                      "improper cross section",
+                      "potholes",
+                      "corrugation",
+                      "loose aggregate",
+                      "dust",
+                      "drainage",
+                    ];
+
+                    return (
+                      <tr key={index}>
+                        <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                          {arrTitle[Number(index) - 1]}
+                        </th>
+                        <th className="border border-black font-normal">
+                          {data.deduct_value}
+                        </th>
+                      </tr>
+                    );
+                  })}
+                  <tr>
+                    <th className="border border-black semibold py-1 capitalize">
+                      total deduct value
+                    </th>
+                    <th className="border border-black font-semibold">
+                      {calculateURCI()}
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="w-full sm:w-1/2">
+              <table className="w-full border border-black">
+                <thead>
+                  <tr>
+                    <th
+                      className="font-semibold py-1 bg-sea-green text-white border border-black"
+                      colSpan={2}
+                    >
+                      URCI Result
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                      deduct value
+                    </th>
+                    <th className="border border-black font-normal">
+                      {calculateURCI()}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                      Q {">"}= 5
+                    </th>
+                    <th className="border border-black font-normal">{q}</th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                      URCI Group
+                    </th>
+                    <th className="border border-black font-normal">{q}</th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                      density (%)
+                    </th>
+                    <th className="border border-black font-normal">
+                      {calculateURCI()}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                      Approximate Value
+                    </th>
+                    <th className="border border-black font-normal">
+                      {x}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-semibold py-1 capitalize w-[60%] bg-green-200">
+                      URCI value
+                    </th>
+                    <th className="border border-black font-semibold bg-green-200">
+                      {y}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="border border-black font-semibold py-1 capitalize w-[60%] bg-green-200">
+                      URCI status
+                    </th>
+                    <th className="border border-black font-semibold bg-green-200 capitalize">
+                      {status}
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

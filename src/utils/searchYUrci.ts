@@ -18,6 +18,7 @@ const searchYUrci = (deductVal: number, q: number) => {
   const urciStatus = searchUrciStatus(yResult);
 
   return {
+    appr_value: x[closestIndex],
     urci_value: yResult,
     urci_status: urciStatus,
   };
