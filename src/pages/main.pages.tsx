@@ -26,7 +26,7 @@ const MainPage = () => {
   });
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("Not Yet Classified");
 
   useEffect(() => {
     if (width && length) {
