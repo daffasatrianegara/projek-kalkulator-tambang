@@ -7,6 +7,7 @@ import ImproperComponent from "@/components/step2.improper.components";
 import PotholesComponent from "@/components/step3.potholes.components";
 import CorrugationComponent from "@/components/step4.corrugation.components";
 import LooseComponent from "@/components/step5.loose.components";
+import DustComponent from "@/components/step6.dust.components";
 
 const MainPage = () => {
   const [length, setLength] = useState("");
@@ -132,6 +133,11 @@ const MainPage = () => {
             meassuredLength={length}
             meassuredWidth={width}
             meassuredArea={area}
+          />
+
+          {/* dust  */}
+          <DustComponent
+            onDataUpdate={handleDataUpdate}
           />
         </div>
 
