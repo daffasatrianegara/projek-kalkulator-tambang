@@ -7,4 +7,4 @@ export type Props = {
 
 export type DustProps = {
   onDataUpdate: (stepNumber: number, data: { deduct_value: number }) => void;
-}
+};

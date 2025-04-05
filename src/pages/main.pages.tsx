@@ -136,9 +136,7 @@ const MainPage = () => {
           />
 
           {/* dust  */}
-          <DustComponent
-            onDataUpdate={handleDataUpdate}
-          />
+          <DustComponent onDataUpdate={handleDataUpdate} />
         </div>
 
         {/* delete when the project up to deployment  */}
