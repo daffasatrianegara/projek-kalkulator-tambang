@@ -73,7 +73,7 @@ const ImproperComponent: React.FC<Props> = ({
             className="mt-1"
             id="pur"
             type="number"
-            placeholder="Enter the length of the damaged road..."
+            placeholder="Masukkan panjang jalan yang rusak..."
             onChange={(e) => setLength(e.target.value)}
             required
           />
@@ -89,7 +89,7 @@ const ImproperComponent: React.FC<Props> = ({
             className="mt-1"
             id="lu"
             type="number"
-            placeholder="Enter the width of the damaged road..."
+            placeholder="Masukkan lebar jalan yang rusak..."
             onChange={(e) => setWidth(e.target.value)}
             required
           />
@@ -120,9 +120,9 @@ const ImproperComponent: React.FC<Props> = ({
               setCat(e.target.value as "high" | "medium" | "low")
             }
           >
-            <option value="high">high</option>
-            <option value="medium">medium</option>
-            <option value="low">low</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
           </select>
           <label
             className="font-semibold text-crayola text-lg sm:text-xl"
