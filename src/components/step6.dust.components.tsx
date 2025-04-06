@@ -39,9 +39,9 @@ const DustComponent: React.FC<DustProps> = ({ onDataUpdate }) => {
               setCat(e.target.value as "high" | "medium" | "low")
             }
           >
-            <option value="high">high</option>
-            <option value="medium">medium</option>
-            <option value="low">low</option>
+            <option value="High">high</option>
+            <option value="Medium">medium</option>
+            <option value="Low">low</option>
           </select>
           <label
             className="font-semibold text-crayola text-lg sm:text-xl"
