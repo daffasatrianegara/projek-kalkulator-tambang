@@ -67,9 +67,14 @@ const MainPage = () => {
       <Toaster position="top-right" richColors />
       <div className="lg:w-[80%] md:w-[90%] w-[95%] h-full bg-alabaster p-8 rounded-lg">
         <div className="mb-8">
-          <p className="text-center font-bold text-2xl md:text-3xl text-crayola">
-            URCI Calculator
-          </p>
+          <div className="w-full flex justify-center">
+            <div className="w-fit flex justify-center items-center gap-2">
+              <img className="w-[15%]" src="/logo.png" alt="img_logo" />
+              <p className="font-bold text-2xl md:text-3xl text-crayola">
+                URCI Calculator
+              </p>
+            </div>
+          </div>
         </div>
         <div className="flex sm:flex-nowrap flex-wrap w-full gap-2">
           <div className="w-full sm:w-1/3">
@@ -83,7 +88,7 @@ const MainPage = () => {
               className="mt-1"
               id="pu"
               type="number"
-              placeholder="Enter the length of the road you measured..."
+              placeholder="Masukkan panjang jalan yang Anda ukur..."
               onChange={(e) => setLength(e.target.value)}
               required
             />
@@ -99,7 +104,7 @@ const MainPage = () => {
               id="lu"
               className="mt-1"
               type="number"
-              placeholder="Enter the width of the road you are measuring..."
+              placeholder="Masukkan lebar jalan yang Anda ukur..."
               onChange={(e) => setWidth(e.target.value)}
               required
             />
@@ -109,7 +114,7 @@ const MainPage = () => {
               className="font-semibold text-crayola text-lg sm:text-xl"
               htmlFor="luk"
             >
-              measured road area (m²) <span className="text-vermilion">*</span>
+              Measured Road Area (m²) <span className="text-vermilion">*</span>
             </label>
             <input
               id="luk"
