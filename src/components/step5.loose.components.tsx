@@ -49,11 +49,11 @@ const LooseComponent: React.FC<Props> = ({
         const y = searchY(looseAgregateParams, cat, density);
         if (y !== null) {
           setDv(y);
-          onDataUpdate(5, { deduct_value: y });
+          onDataUpdate(5, { deduct_value: dv });
         }
       }
     }
-  }, [length, width, area, cat]);
+  }, [length, width, area, cat, dv]);
   return (
     <div>
       <div className="">

@@ -54,6 +54,7 @@ const DrainageComponent: React.FC<Props> = ({
       }
     }
   }, [length, width, area, cat]);
+
   return (
     <div>
       <div className="">
@@ -120,9 +121,9 @@ const DrainageComponent: React.FC<Props> = ({
               setCat(e.target.value as "high" | "medium" | "low")
             }
           >
-            <option value="High">high</option>
-            <option value="Medium">medium</option>
-            <option value="Low">low</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
           </select>
           <label
             className="font-semibold text-crayola text-lg sm:text-xl"
