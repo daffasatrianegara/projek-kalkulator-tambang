@@ -1,5 +1,8 @@
 export type Props = {
-  onDataUpdate: (stepNumber: number, data: { deduct_value: number, status?: string }) => void;
+  onDataUpdate: (
+    stepNumber: number,
+    data: { deduct_value: number; status?: string },
+  ) => void;
   meassuredLength: string;
   meassuredWidth: string;
   meassuredArea: number;

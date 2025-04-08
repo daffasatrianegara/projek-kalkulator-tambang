@@ -264,7 +264,10 @@ const MainPage = () => {
                     <th className="border border-black semibold py-1 capitalize">
                       total deduct value
                     </th>
-                    <th className="border border-black font-semibold" colSpan={2}>
+                    <th
+                      className="border border-black font-semibold"
+                      colSpan={2}
+                    >
                       {calculateURCI()}
                     </th>
                   </tr>
