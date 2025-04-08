@@ -57,10 +57,15 @@ const DrainageComponent: React.FC<Props> = ({
 
   return (
     <div>
-      <div className="">
-        <p className="font-semibold text-xl md:text-2xl text-crayola-hover">
-          Drainage
-        </p>
+      <div className="w-full">
+        <div className="flex gap-2 sm:gap-3 items-center">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-crayola rounded-full flex items-center justify-center">
+            <p className="font-semibold text-lg md:text-xl text-alabaster">7</p>
+          </div>
+          <p className="font-semibold text-xl md:text-2xl text-crayola-hover">
+            Drainage
+          </p>
+        </div>
       </div>
       <div className="flex sm:flex-nowrap flex-wrap w-full gap-3">
         <div className="w-full sm:w-1/3">
