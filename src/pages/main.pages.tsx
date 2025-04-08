@@ -16,7 +16,7 @@ const MainPage = () => {
   const [area, setArea] = useState(0);
   const [q, setQ] = useState<number>(0);
   const [stepData, setStepData] = useState({
-    1: { deduct_value: 0 },
+    1: { deduct_value: 0, status: "high" },
     2: { deduct_value: 0 },
     3: { deduct_value: 0 },
     4: { deduct_value: 0 },
@@ -189,9 +189,20 @@ const MainPage = () => {
                   <tr>
                     <th
                       className="font-semibold py-1 bg-sea-green text-white border border-black"
-                      colSpan={2}
+                      colSpan={3}
                     >
                       Deduct Value From Each Step
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="font-semibold py-1 bg-sea-green-hover text-white border border-black capitalize">
+                      step name
+                    </th>
+                    <th className="font-semibold py-1 bg-sea-green-hover text-white border border-black capitalize">
+                      deduct value
+                    </th>
+                    <th className="font-semibold py-1 bg-sea-green-hover text-white border border-black capitalize">
+                      solution
                     </th>
                   </tr>
                 </thead>
@@ -207,13 +218,44 @@ const MainPage = () => {
                       "drainage",
                     ];
 
+                    const getSolution = (step: number, status?: string) => {
+                      if (arrTitle[step - 1] === "rutting") {
+                        if (status === "high") {
+                          return "Patching";
+                        } else if (status === "medium") {
+                          return "Grading + Resheeting";
+                        } else {
+                          return "Grading";
+                        }
+                      }
+
+                      if (step === 2) {
+                        return "Resheeting";
+                      } else if (step === 3) {
+                        return "Patching";
+                      } else if (step === 4) {
+                        return "Resheeting";
+                      } else if (step === 5) {
+                        return "Compacting & Resheeting";
+                      } else if (step === 6) {
+                        return "Water Spraying";
+                      } else if (step === 7) {
+                        return "General Drainage";
+                      }
+                    };
+
                     return (
                       <tr key={index}>
-                        <th className="border border-black font-normal py-1 capitalize w-[60%]">
+                        <th className="border border-black font-normal py-1 capitalize w-[50%]">
                           {arrTitle[Number(index) - 1]}
                         </th>
-                        <th className="border border-black font-normal">
+                        <th className="border border-black font-normal w-[20%]">
                           {data.deduct_value}
+                        </th>
+                        <th className="border border-black font-normal px-1">
+                          {Number(index) === 1
+                            ? getSolution(Number(index), stepData[1].status)
+                            : getSolution(Number(index))}
                         </th>
                       </tr>
                     );
@@ -222,7 +264,7 @@ const MainPage = () => {
                     <th className="border border-black semibold py-1 capitalize">
                       total deduct value
                     </th>
-                    <th className="border border-black font-semibold">
+                    <th className="border border-black font-semibold" colSpan={2}>
                       {calculateURCI()}
                     </th>
                   </tr>

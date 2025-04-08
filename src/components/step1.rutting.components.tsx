@@ -49,7 +49,7 @@ const RuttingComponent: React.FC<Props> = ({
         const y = searchY(ruttingParams, cat, density);
         if (y !== null) {
           setDv(y);
-          onDataUpdate(1, { deduct_value: y });
+          onDataUpdate(1, { deduct_value: y, status: cat });
         }
       }
     }
