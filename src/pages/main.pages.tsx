@@ -69,7 +69,7 @@ const MainPage = () => {
         <div className="mb-8">
           <div className="w-full flex justify-center">
             <div className="w-fit flex justify-center items-center gap-2">
-              <img className="w-[15%]" src="/logo.png" alt="img_logo" />
+              <img className="w-[15%]" src="/logo/logo.png" alt="img_logo" />
               <p className="font-bold text-2xl md:text-3xl text-crayola">
                 URCI Calculator
               </p>
