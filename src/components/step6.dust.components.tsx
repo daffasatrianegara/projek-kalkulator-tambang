@@ -27,6 +27,11 @@ const DustComponent: React.FC<DustProps> = ({ onDataUpdate }) => {
             Dust
           </p>
         </div>
+        <img
+          className="w-full sm:w-1/2 border-2 border-crayola rounded my-3 sm:my-5"
+          src="/img/6.dust.jpg"
+          alt="img_dust"
+        />
       </div>
       <div className="flex sm:flex-nowrap flex-wrap w-full gap-3">
         <div className="w-full sm:w-1/2">

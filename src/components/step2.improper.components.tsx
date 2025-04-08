@@ -65,6 +65,11 @@ const ImproperComponent: React.FC<Props> = ({
             Improper Cross Section
           </p>
         </div>
+        <img
+          className="w-full sm:w-1/2 border-2 border-crayola rounded my-3 sm:my-5"
+          src="/img/2.improper.jpg"
+          alt="img_improper"
+        />
       </div>
       <div className="flex sm:flex-nowrap flex-wrap w-full gap-3">
         <div className="w-full sm:w-1/3">
