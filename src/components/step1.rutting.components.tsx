@@ -59,9 +59,7 @@ const RuttingComponent: React.FC<Props> = ({
       <div className="w-full">
         <div className="flex gap-2 sm:gap-3 items-center">
           <div className="w-7 h-7 sm:w-8 sm:h-8 bg-crayola rounded-full flex items-center justify-center">
-            <p className="font-semibold text-lg md:text-xl text-alabaster">
-              1
-            </p>
+            <p className="font-semibold text-lg md:text-xl text-alabaster">1</p>
           </div>
           <p className="font-semibold text-xl md:text-2xl text-crayola-hover">
             Rutting
